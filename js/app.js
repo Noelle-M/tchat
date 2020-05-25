@@ -2,14 +2,20 @@ function getMessages(){
 
   const requeteAjax = new XMLHttpRequest();
   requeteAjax.open("GET", "handler.php");
-
+//2020-05-25 17:25:01
+// 2 05-25 1 2020
   requeteAjax.onload = function(){
     const resultat = JSON.parse(requeteAjax.responseText);
+
     const html = resultat.reverse().map(function(message){
+        const date = message.creat_at.substring(5);
       return `
         <div class="message">
-          <span class="date">${message.creat_at.substring(11, 16)}</span>
-          <span class="author">${message.author}</span> :
+          <span class="date" style="font-size: 10px;
+    font-style: italic;
+    color: gray;">${date}</span><br/>
+
+          <span class="author" style="color:darkorange; font-size"15px">${message.author}</span> :
           <span class="content">${message.content}</span>
         </div>
       `
