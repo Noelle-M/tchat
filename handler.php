@@ -1,50 +1,49 @@
 <?php
-session_start();
-try
-{
-$db = new PDO('mysql:host=localhost;dbname=msf', 'root', '');
-}
-catch (Exception $e)
-{
-        die('Erreur : ' . $e->getMessage());
-}
+
+$db = new PDO('mysql:host=localhost;dbname=msf;charset=utf8', 'root', '', [
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+]);
 
 $task = "list";
 
 if(array_key_exists("task", $_GET)){
-    $task = $_GET['task'];
+  $task = $_GET['task'];
 }
 
 if($task == "write"){
-    postMessage();
-}else{
-    getMessages();
+  postMessage();
+} else {
+  getMessages();
 }
 
 function getMessages(){
-    global $db;
+  global $db;
 
-    $resultats = $db->query('SELECT * FROM tchat ORDER BY creat_at LIMIT 50');
-
-    $messages = $resultats->fetchAll();
-
-    echo json_encode($messages);
+  $resultats = $db->query("SELECT * FROM tchat ORDER BY creat_at DESC LIMIT 20");
+  $messages = $resultats->fetchAll();
+  echo json_encode($messages);
 }
 
 function postMessage(){
-    global $db;
+  global $db;
 
-    if(!array_key_exists('author', $_POST) || !array_key_exists('content', $_POST)){
-        echo json_encode(["statuts" => "error", "message" => "Vous n'avez saisi aucun message"]);
-        return;
-    }
+  if(!array_key_exists('author', $_POST) || !array_key_exists('content', $_POST)){
 
-    $author = $_POST['author'];
-    $content = $_POST['content'];
+    echo json_encode(["status" => "error", "message" => "One field or many have not been sent"]);
+    return;
 
-    $query = $db->prepare('INSERT INTO tchat SET author = :author, content = :content, creat_at = now()');
+  }
 
-    $query->execute(["author" => $author, "content" => $content]);
+  $author = $_POST['author'];
+  $content = $_POST['content'];
 
-    echo json_encode(["statuts" => "success"]);
+  $query = $db->prepare('INSERT INTO tchat SET author = :author, content = :content, creat_at = NOW()');
+
+  $query->execute([
+    "author" => $author,
+    "content" => $content
+  ]);
+
+  echo json_encode(["status" => "success"]);
 }

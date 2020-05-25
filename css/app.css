@@ -4,3 +4,9 @@
     font-style: italic;
     color: gray;
 }
+
+.chat
+{
+    margin-left: auto;
+    margin-right: auto;
+}
