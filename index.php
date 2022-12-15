@@ -11,7 +11,7 @@ $prenom = $prenoms['prenom'];
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -21,12 +21,12 @@ $prenom = $prenoms['prenom'];
         <link rel="stylesheet" href="../../../asset/css/app.css">
     </head>
     <body class="body-chat">
-        <div class="header">
-            <h1>MySpaceFamily 2.0</h1>
+        <div class="header w-75 mx-auto">
+            <h1>MyChat</h1>
             <p class="text-center txt-bureau">Chat's Family</p>
         </div> <!-- END HEADER -->
-            <section class="chat card w-50">
-                <div class="messages" style="">
+            <section class="chat card w-50 mx-auto shadow">
+                <div class="messages">
                 </div>
                 <div class="user-inputs">
                     <form action="handler.php?task=write" method="POST">
