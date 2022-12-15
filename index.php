@@ -1,9 +1,9 @@
 <?php
 session_start();
-include('../../msf/includes/db.php');
+include('includes/db.php');
 
-$id = $_SESSION['auth']['id'];
-$membres = $db->prepare('SELECT * FROM membres WHERE id=:id');
+$id = 3;
+$membres = $db->prepare('SELECT * FROM user WHERE id=:id');
 $membres->bindValue(':id',$id,PDO::PARAM_STR);
 $membres->execute();
 $prenoms = $membres->fetch();

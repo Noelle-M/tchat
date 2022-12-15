@@ -1,15 +1,15 @@
-function getMessages(){
+function getMessages() {
 
-  const requeteAjax = new XMLHttpRequest();
-  requeteAjax.open("GET", "handler.php");
-//2020-05-25 17:25:01
-// 2 05-25 1 2020
-  requeteAjax.onload = function(){
-    const resultat = JSON.parse(requeteAjax.responseText);
+    const requeteAjax = new XMLHttpRequest();
+    requeteAjax.open("GET", "handler.php");
+    //2020-05-25 17:25:01
+    // 2 05-25 1 2020
+    requeteAjax.onload = function() {
+        const resultat = JSON.parse(requeteAjax.responseText);
 
-    const html = resultat.reverse().map(function(message){
-        const date = message.creat_at.substring(5);
-      return `
+        const html = resultat.reverse().map(function(message) {
+            const date = message.creat_at.substring(0, 13);
+            return `
         <div class="message">
           <span class="date" style="font-size: 10px;
     font-style: italic;
@@ -19,38 +19,38 @@ function getMessages(){
           <span class="content">${message.content}</span>
         </div>
       `
-    }).join('');
+        }).join('');
 
-    const messages = document.querySelector('.messages');
+        const messages = document.querySelector('.messages');
 
-    messages.innerHTML = html;
-    messages.scrollTop = messages.scrollHeight;
-  }
+        messages.innerHTML = html;
+        messages.scrollTop = messages.scrollHeight;
+    }
 
-  requeteAjax.send();
+    requeteAjax.send();
 }
 
-function postMessage(event){
+function postMessage(event) {
 
-  event.preventDefault();
+    event.preventDefault();
 
-  const author = document.querySelector('#author');
-  const content = document.querySelector('#content');
+    const author = document.querySelector('#author');
+    const content = document.querySelector('#content');
 
-  const data = new FormData();
-  data.append('author', author.value);
-  data.append('content', content.value);
+    const data = new FormData();
+    data.append('author', author.value);
+    data.append('content', content.value);
 
-  const requeteAjax = new XMLHttpRequest();
-  requeteAjax.open('POST', 'handler.php?task=write');
+    const requeteAjax = new XMLHttpRequest();
+    requeteAjax.open('POST', 'handler.php?task=write');
 
-  requeteAjax.onload = function(){
-    content.value = '';
-    content.focus();
-    getMessages();
-  }
+    requeteAjax.onload = function() {
+        content.value = '';
+        content.focus();
+        getMessages();
+    }
 
-  requeteAjax.send(data);
+    requeteAjax.send(data);
 }
 
 document.querySelector('form').addEventListener('submit', postMessage);
