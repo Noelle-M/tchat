@@ -1,27 +1,30 @@
-.messages
-{
-    overflow:scroll;
-    height:400px;
+.messages {
+    overflow: scroll;
+    height: 400px;
 }
 
-.date
-{
+.date {
     font-size: 10px;
     font-style: italic;
     color: gray;
 }
 
-.chat
-{
+.chat {
     margin-left: auto;
     margin-right: auto;
 }
 
-.input-chat
-{
+.chat-anim {
+    z-index: 9999;
+    height: 200px !important;
+    top: 0;
+    right: 50%;
+}
+
+.input-chat {
     border: 1px solid yellow;
     padding: 5px;
-    background: black;
+    background: ;
     color: white;
     font-weight: bold;
 }
