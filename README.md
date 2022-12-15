@@ -22,6 +22,7 @@ N'oubliez pas de le changer dans le code si vous n'y enregistrez pas un "3" dans
 
 Dans le dossier `includes/db.php` remplacer les infos de la connexion à la BDD par vos infos
 ![2022-12-15_23h23_55](https://user-images.githubusercontent.com/43520762/207980539-95c38e64-408a-4e66-ab5d-e361f8b6fee6.png)
+Ainsi que dans le fichier handler.php
 
 
 Allez à la racine du dossier et lancez un serveur en tapant la ligne de commande : `php -S localhost:8000` depuis votre terminal.
